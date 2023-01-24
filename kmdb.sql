@@ -109,9 +109,159 @@ DROP TABLE IF EXISTS studios;
 -- Create new tables, according to your domain model
 -- TODO!
 
+CREATE TABLE movies ( 
+    ID INTEGER PRIMARY KEY AUTOINCREMENT, 
+    Movie_name TEXT,
+    StudioID INTEGER,
+    Rating TEXT,
+    Year INTEGER
+);
+
+CREATE TABLE actors (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    MovieID INTEGER,
+    Actor_name TEXT,
+    Character_name TEXT
+);
+
+CREATE TABLE studios (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Studio_name TEXT
+
+);
+
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
+INSERT INTO studios (
+    Studio_name
+)
+
+VALUES(
+    "Warner Bros."
+);
+
+INSERT INTO movies (
+    Movie_name,
+    StudioID,
+    Rating,
+    Year
+)
+
+VALUES (
+    "Batman Begins",
+    1,
+    "PG-13",
+    2005
+);
+
+INSERT INTO movies (
+    Movie_name,
+    StudioID,
+    Rating,
+    Year
+)
+VALUES(
+    "The Dark Knight",
+    1,
+    "PG-13",
+    2008   
+);
+
+INSERT INTO movies (
+    Movie_name,
+    StudioID,
+    Rating,
+    Year
+)
+
+VALUES(
+    "The Dark Knight Rises",
+    1,
+    "PG-13",
+    2012   
+);
+
+INSERT INTO actors (
+    Actor_name,
+    Character_name,
+    MovieID
+)
+VALUES(
+    "Christian Bale",
+    "Bruce Wayne",
+    1
+),
+(
+    "Michael Caine",
+    "Alfred",
+    1
+),
+(
+    "Liam Neeson",
+    "Ras Al Ghul",
+    1
+),
+( 
+    "Katie Holmes", 
+    "Rachel Dawes",
+    1
+),
+(
+    "Gary Oldman",
+    "Commissioner Gordon",
+    1
+),
+( 
+    "Christian Bale",
+    "Bruce Wayne", 
+    2
+),
+( 
+    "Heath Ledger", 
+    "Joker",
+    2
+),
+(
+    "Aaron Eckhart",
+    "Harvey Dent",
+    2
+),
+(
+    "Michael Caine",
+    "Alfred", 
+    2
+),
+( 
+    "Maggie Gyllenhaal",
+    "Rachel Dawes",
+    2
+),
+(
+    "Christian Bale",
+    "Bruce Wayne",
+    3
+),
+(
+    "Gary Oldman",
+    "Commissioner Gordon",
+    3
+),
+(
+    "Tom Hardy",
+    "Bane",
+    3
+),
+(
+    "Joseph Gordon-Levitt", 
+    "John Blake",
+    3
+),
+(
+    "Anne Hathaway",
+    "Selina Kyle",
+    3
+);
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -121,6 +271,10 @@ DROP TABLE IF EXISTS studios;
 -- The SQL statement for the movies output
 -- TODO!
 
+SELECT movies.Movie_name, movies.Year, movies.Rating, studios.Studio_name
+FROM movies INNER JOIN studios ON movies.StudioID = studios.ID;
+
+
 -- Prints a header for the cast output
 .print ""
 .print "Top Cast"
@@ -128,5 +282,9 @@ DROP TABLE IF EXISTS studios;
 .print ""
 
 
+
 -- The SQL statement for the cast output
 -- TODO!
+
+SELECT movies.Movie_name, actors.Actor_name, actors.Character_name
+FROM movies INNER JOIN actors ON movies.ID = actors.MovieID;
